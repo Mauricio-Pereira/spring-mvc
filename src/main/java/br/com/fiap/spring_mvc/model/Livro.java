@@ -10,6 +10,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 @Entity
 @Table(name = "livro")
 @Data
@@ -24,6 +26,10 @@ public class Livro {
     @Column(name = "categoria")
     @Enumerated(EnumType.STRING)
     private Categoria categoria;
+    @Column(name = "preco")
+    private BigDecimal preco;
+    @Column(name = "isbn")
+    private String isbn;
 
 
 }

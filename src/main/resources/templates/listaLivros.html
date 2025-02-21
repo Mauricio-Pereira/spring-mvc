@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Lista de Livros</title>
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}"></div>
+<div>
+  <h2>Livros Cadastrados</h2>
+  <table border="1">
+    <thead>
+    <tr>
+      <th>Título</th>
+      <th>Autor</th>
+      <th>Categoria</th>
+      <th>Preço</th>
+      <th>ISBN</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="livro : ${livros}">
+      <td th:text="${livro.titulo}"></td>
+      <td th:text="${livro.autor}"></td>
+      <td th:text="${livro.categoria}"></td>
+      <td th:text="${livro.preco}"></td>
+      <td th:text="${livro.isbn}"></td>
+    </tr>
+    </tbody>
+  </table>
+  <br/>
+  <!-- Botão para cadastrar novo livro -->
+  <a th:href="@{/livro/cadastro}">
+    <button type="button">Cadastrar Novo Livro</button>
+  </a>
+</div>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Livro</title>
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}"></div>
+<div>
+    <form method="post" th:action="@{/livro/cadastrar}" th:object="${livroRequest}">
+        <table>
+            <tr>
+                <td>Título:</td>
+                <td><input type="text" th:field="*{titulo}" required/></td>
+            </tr>
+            <tr>
+                <td>Autor:</td>
+                <td><input type="text" th:field="*{autor}" required/></td>
+            </tr>
+            <tr>
+                <td>Categoria:</td>
+                <td>
+                    <select th:field="*{categoria}" required>
+                        <option value="ROMANCE">Romance</option>
+                        <option value="FICCAO">Ficção</option>
+                        <option value="FANTASIA">Fantasia</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Preço:</td>
+                <td><input type="text" th:field="*{preco}"/></td>
+            </tr>
+            <tr>
+                <td>ISBN:</td>
+                <td><input type="text" th:field="*{isbn}"/></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="submit" value="Cadastrar" /></td>
+            </tr>
+        </table>
+    </form>
+    <!-- Exibe mensagem se existir -->
+    <div th:if="${mensagem}">
+        <p th:text="${mensagem}"></p>
+    </div>
+</div>
+</body>
+</html>

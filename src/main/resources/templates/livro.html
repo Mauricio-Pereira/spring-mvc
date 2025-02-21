@@ -2,13 +2,30 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Livro</title>
+    <title>Title</title>
 </head>
 <body>
-    <div th:replace="~{fragments/header :: header}"></div>
-    <h2> Livro: <span th:text="${livro.getTitulo()}"></span> </h2>
-    <p>Autor(a): <span th:text="${livro.getAutor()}"></span></p>
-    <p>Categoria: <span th:text="${livro.getCategoria().getDescricao()}"></span></p>
-    <div th:replace="~{fragments/footer :: footer}"></div>
+<div th:replace="~{fragments/header :: header}"></div>
+<div th:object="${livro}">
+    <h1><span th:text="*{titulo}"></span></h1>
+    <p>Autor(a): <span th:text="*{autor}"></span></p>
+    <p>Categoria: <span th:text="*{categoria.descricao}"></span></p>
+</div>
+<p>
+    Lista de livro utilizando variable expression
+    <li th:each="livro : ${livros}" th:text="${livro.autor + ' - ' + livro.titulo}"></li>
+</p>
+<p>
+    Lista de livro utilizando selection expression
+    <li th:each="livro : ${livros}" th:object="${livro}" th:text="*{autor + ' - ' + titulo}"></li>
+</p>
+<p><a th:href="@{/ola}"> Olá </a></p>
+<span th:text="${2 > 1 ? 'Maior' : 'Menor'}"></span>
+<form th:action="@{/ola}">
+    <input type="button" th:value="#{form.submit}" />
+</form>
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+
 </body>
 </html>
