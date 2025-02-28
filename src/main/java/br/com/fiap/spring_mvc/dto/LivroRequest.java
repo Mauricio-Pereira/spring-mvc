@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 
 @Data
 public class LivroRequest{
+        private Long id;
         @NotBlank(message = "O título é obrigatório")
         private String titulo;
         @NotBlank(message = "O autor é obrigatório")
@@ -23,5 +24,4 @@ public class LivroRequest{
         private BigDecimal preco;
         @Pattern(regexp = "^(97(8|9))?(\\d{9}(\\d|X))$", message = "O ISBN deve ser no formato 978XXXXXXXXX ou 979XXXXXXXXX")
         private String isbn;
-
 }

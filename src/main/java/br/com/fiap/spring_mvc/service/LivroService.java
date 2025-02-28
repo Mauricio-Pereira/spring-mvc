@@ -8,6 +8,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class LivroService {
@@ -30,4 +31,25 @@ public class LivroService {
         BeanUtils.copyProperties(livroRequest, livro);
         return livro;
     }
+
+    public void deletarLivro(Long id) {
+        Optional<Livro> optionalLivro = livroRepository.findById(id);
+        if(optionalLivro.isPresent()){
+            livroRepository.delete(optionalLivro.get());
+        } else {
+            throw new RuntimeException("Livro não encontrado");
+        }
+    }
+
+    public void atualizarLivro(LivroRequest livroRequest) {
+        Optional<Livro> optionalLivro = livroRepository.findById(livroRequest.getId());
+        if(optionalLivro.isPresent()){
+            Livro livroExistente = optionalLivro.get();
+            BeanUtils.copyProperties(livroRequest, livroExistente, "id");
+            livroRepository.save(livroExistente);
+        } else {
+            throw new RuntimeException("Livro não encontrado");
+        }
+    }
+
 }

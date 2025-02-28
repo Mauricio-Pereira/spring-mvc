@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="modals">
+
+    <!-- Modal de edição -->
+    <div id="editModal">
+        <h3>Editar Livro</h3>
+        <form method="post" th:action="@{/livro/atualizar}">
+            <input type="hidden" id="editId" name="id"/>
+            <div class="mb-2">
+                <label for="editTitulo">Título:</label>
+                <input type="text" id="editTitulo" name="titulo" required class="form-control"/>
+            </div>
+            <div class="mb-2">
+                <label for="editAutor">Autor:</label>
+                <input type="text" id="editAutor" name="autor" required class="form-control"/>
+            </div>
+            <div class="mb-2">
+                <label for="editCategoria">Categoria:</label>
+                <select id="editCategoria" name="categoria" required class="form-select">
+                    <option value="ROMANCE">Romance</option>
+                    <option value="FICCAO">Ficção</option>
+                    <option value="FANTASIA">Fantasia</option>
+                </select>
+            </div>
+            <div class="mb-2">
+                <label for="editPreco">Preço:</label>
+                <input type="text" id="editPreco" name="preco" class="form-control"/>
+            </div>
+            <div class="mb-2">
+                <label for="editIsbn">ISBN:</label>
+                <input type="text" id="editIsbn" name="isbn" class="form-control"/>
+            </div>
+            <button type="submit" class="btn btn-primary">Atualizar</button>
+            <button type="button" onclick="closeAllModals()" class="btn btn-secondary">Cancelar</button>
+        </form>
+    </div>
+
+    <!-- Modal de exclusão -->
+    <div id="deleteModal">
+        <h3>Confirmar Exclusão</h3>
+        <p id="deleteMensagem"></p>
+        <button id="confirmDeleteButton" type="button" class="btn btn-danger">Sim, excluir</button>
+        <button type="button" onclick="closeDeleteModal()" class="btn btn-secondary">Cancelar</button>
+    </div>
+</div>
+</html>

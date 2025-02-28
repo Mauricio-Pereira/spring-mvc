@@ -7,6 +7,7 @@ import java.util.List;
 import br.com.fiap.spring_mvc.service.LivroService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -34,11 +35,22 @@ public class LivroController {
         return new ModelAndView("redirect:/livro/lista");
     }
 
-
     @GetMapping("/lista")
     public ModelAndView listaLivros() {
         ModelAndView mv = new ModelAndView("listaLivros");
         mv.addObject("livros", livroService.listarLivros());
         return mv;
+    }
+
+    @GetMapping("/deletar/{id}")
+    public ModelAndView deletarLivro(@PathVariable Long id) {
+        livroService.deletarLivro(id);
+        return new ModelAndView("redirect:/livro/lista");
+    }
+
+    @PostMapping("/atualizar")
+    public ModelAndView atualizarLivro(LivroRequest livroRequest) {
+        livroService.atualizarLivro(livroRequest);
+        return new ModelAndView("redirect:/livro/lista");
     }
 }

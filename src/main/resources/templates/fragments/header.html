@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
 </head>
 <body>
-<div th:fragment="header">
-    <h1>Exemplo de cabeçalho</h1>
-    <hr />
+<!-- Fragmento header da aplicação de livros-->
+<div th:fragment="header" style="text-align: center;">
+    <hr /> <h1>Aplicação de Livros</h1> <hr />
 </div>
 
 </body>

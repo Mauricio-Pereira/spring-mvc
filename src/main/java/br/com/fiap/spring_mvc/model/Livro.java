@@ -28,7 +28,7 @@ public class Livro {
     private Categoria categoria;
     @Column(name = "preco")
     private BigDecimal preco;
-    @Column(name = "isbn")
+    @Column(name = "isbn", unique = true)
     private String isbn;
 
 

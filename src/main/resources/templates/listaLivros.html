@@ -1,38 +1,59 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>Lista de Livros</title>
+    <meta charset="UTF-8">
+    <title>Lista de Livros</title>
+    <link th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
 </head>
 <body>
 <div th:replace="~{fragments/header :: header}"></div>
-<div>
-  <h2>Livros Cadastrados</h2>
-  <table border="1">
-    <thead>
-    <tr>
-      <th>Título</th>
-      <th>Autor</th>
-      <th>Categoria</th>
-      <th>Preço</th>
-      <th>ISBN</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="livro : ${livros}">
-      <td th:text="${livro.titulo}"></td>
-      <td th:text="${livro.autor}"></td>
-      <td th:text="${livro.categoria}"></td>
-      <td th:text="${livro.preco}"></td>
-      <td th:text="${livro.isbn}"></td>
-    </tr>
-    </tbody>
-  </table>
-  <br/>
-  <!-- Botão para cadastrar novo livro -->
-  <a th:href="@{/livro/cadastro}">
-    <button type="button">Cadastrar Novo Livro</button>
-  </a>
+<div class="container mt-3">
+    <h2>Livros Cadastrados</h2>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Título</th>
+            <th>Autor</th>
+            <th>Categoria</th>
+            <th>Preço</th>
+            <th>ISBN</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="livro : ${livros}">
+            <td th:text="${livro.titulo}"></td>
+            <td th:text="${livro.autor}"></td>
+            <td th:text="${livro.categoria}"></td>
+            <td th:text="${livro.preco}"></td>
+            <td th:text="${livro.isbn}"></td>
+            <td>
+                <button type="button"
+                        th:attr="data-id=${livro.id}, data-titulo=${livro.titulo}, data-autor=${livro.autor}, data-categoria=${livro.categoria}, data-preco=${livro.preco}, data-isbn=${livro.isbn}"
+                        onclick="openEditModal(this)" class="btn btn-primary btn-sm">
+                    Editar
+                </button>
+                <button type="button"
+                        th:attr="data-id=${livro.id}, data-titulo=${livro.titulo}"
+                        onclick="openDeleteModal(this)" class="btn btn-danger btn-sm">
+                    Deletar
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <br/>
+    <a th:href="@{/livro/cadastro}">
+        <button type="button" class="btn btn-success">Cadastrar Novo Livro</button>
+    </a>
 </div>
+
+<!-- Inclui os modais através do fragmento -->
+<div th:replace="~{fragments/modals :: modals}"></div>
+
+<!-- Inclua os scripts com defer -->
+<script th:src="@{/js/scripts.js}" defer></script>
+<script th:src="@{/webjars/bootstrap/5.3.3/js/bootstrap.min.js}" defer></script>
 </body>
 </html>
